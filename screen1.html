@@ -9,21 +9,22 @@
 </head>
 
 <body>
-  <header>
-  <div class="container header-content">
-    <div class="logo">
-      <i class="fas fa-exchange-alt"></i>
-      Skill Swap 
-    </div>
-    <div class="nav-links">
-      <a href="#">Home</a>
-      <a href="#">My Skills</a>
-      <a href="#">Messages</a>
-      <a href="screen2.html" id="loginLink">Login/SignUp</a>
-      <div id="userAvatar" class="avatar" style="display: none;"></div>
-    </div>
-  </div>
-</header>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-exchange-alt"></i>
+                Skill Swap 
+            </div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+             
+                <a href="#">My Skills</a>
+                <a href="#">Messages</a>
+                <a href="screen2.html">Login/SignUp</a>
+            </div>
+            
+    </header>
 
     <!-- Search Section -->
     <section class="search-section">
@@ -44,9 +45,9 @@
             <!-- User Card 1 -->
             <div class="user-card">
                 <div class="card-header">
-                    <div class="avatar">MD</div>
+                    <div class="avatar">M</div>
                     <div class="user-info">
-                        <div class="user-name">Mark Demo</div>
+                        <div class="user-name"><a href="screen4.html"> Mark </a> </div>
                         <div class="rating">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -60,11 +61,11 @@
                 <div class="card-content">
                     <div class="skill-row">
                         <div class="skill-label">Skills offered:</div>
-                        <div class="skill-value">Gown Script (Python)</div>
+                        <div class="skill-value">ML , Website Testing</div>
                     </div>
                     <div class="skill-row">
                         <div class="skill-label">Skill wanted:</div>
-                        <div class="skill-value">(Swissing) Graphic Designer</div>
+                        <div class="skill-value">Graphic Designer , Cyber-Security</div>
                     </div>
                     <button class="request-btn">Request Swap</button>
                 </div>
@@ -72,10 +73,11 @@
             
             <!-- User Card 2 -->
             <div class="user-card">
-                <div class="card-header">
+              
+                <div class="card-header"> 
                     <div class="avatar">M</div>
                     <div class="user-info">
-                        <div class="user-name">Michelle</div>
+                        <div class="user-name"><a href="screen.4.1.html">Michalle</a></div>
                         <div class="rating">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -89,11 +91,11 @@
                 <div class="card-content">
                     <div class="skill-row">
                         <div class="skill-label">Skills offered:</div>
-                        <div class="skill-value">Gown Script (Python)</div>
+                        <div class="skill-value">Cyber Security , Java</div>
                     </div>
                     <div class="skill-row">
                         <div class="skill-label">Skill wanted:</div>
-                        <div class="skill-value">(Swissing) Graphic Designer</div>
+                        <div class="skill-value">ML, website Testing</div>
                     </div>
                     <button class="request-btn">Request Swap</button>
                 </div>
@@ -104,7 +106,7 @@
                 <div class="card-header">
                     <div class="avatar">JW</div>
                     <div class="user-info">
-                        <div class="user-name">Joe Wills</div>
+                        <div class="user-name"><a href="screen.4.2.html">Joe Wills</a></div>
                         <div class="rating">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -118,11 +120,11 @@
                 <div class="card-content">
                     <div class="skill-row">
                         <div class="skill-label">Skills offered:</div>
-                        <div class="skill-value">Gown Script (Python)</div>
+                        <div class="skill-value">Python , Java</div>
                     </div>
                     <div class="skill-row">
                         <div class="skill-label">Skill wanted:</div>
-                        <div class="skill-value">(Swissing) Graphic Designer</div>
+                        <div class="skill-value">AI,Ml ,  Video Editor</div>
                     </div>
                     <button class="request-btn">Request Swap</button>
                 </div>
@@ -188,6 +190,47 @@
             </div>
         </div>
     </footer>
-<script src="screen1.js"></script>
+    <script>
+        const loginLink = document.getElementById('loginLink');
+const userAvatar = document.getElementById('userAvatar');
+const requestButtons = document.querySelectorAll('.request-btn');
+
+function checkLoginStatus() {
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  const userEmail = localStorage.getItem('userEmail');
+
+  if (isLoggedIn && userEmail) {
+    const firstLetter = userEmail.charAt(0).toUpperCase();
+    userAvatar.textContent = firstLetter;
+    userAvatar.style.display = 'flex';
+
+    loginLink.style.display = 'none';
+
+    requestButtons.forEach(btn => {
+      btn.disabled = false;
+    });
+  } else {
+    userAvatar.style.display = 'none';
+    loginLink.style.display = 'inline-block';
+
+    requestButtons.forEach(btn => {
+      btn.disabled = true;
+    });
+  }
+}
+
+requestButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    if (!isLoggedIn) {
+      alert('Kindly login for it.');
+    } else {
+      alert('Request sent!');
+    }
+  });
+});
+
+checkLoginStatus();
+    </script>
 </body>
 </html>
