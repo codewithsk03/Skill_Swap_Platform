@@ -322,76 +322,132 @@
     </footer>
  <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Status filter functionality
-            const statusBtns = document.querySelectorAll('.status-btn');
-            statusBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    statusBtns.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
+            // Get references to key DOM elements
+            const statusDropdown = document.querySelector('.status-dropdown');
+            const searchInput = document.querySelector('.search-input');
+            // Get all request cards once when the page loads
+            const allRequestCards = document.querySelectorAll('.request-card');
+
+            // Function to filter requests based on selected status and search term
+            function filterRequests() {
+                const selectedStatus = statusDropdown.value; // 'all', 'pending', 'accepted', 'rejected'
+                const searchTerm = searchInput.value.toLowerCase().trim();
+
+                allRequestCards.forEach(card => {
+                    const userName = card.querySelector('.user-name').textContent.toLowerCase();
                     
-                    const status = this.textContent.trim();
-                    alert(`Showing ${status} requests`);
-                });
-            });
-            
-            // Accept button functionality
-            const acceptBtns = document.querySelectorAll('.btn-accept');
-            acceptBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const card = this.closest('.request-card');
-                    const userName = card.querySelector('h3').textContent;
-                    
-                    // Change status to accepted
-                    const statusTag = card.querySelector('.status-tag');
-                    statusTag.className = 'status-tag status-accepted';
-                    statusTag.innerHTML = '<i class="fas fa-check-circle"></i> Accepted';
-                    
-                    // Remove action buttons
-                    const actions = card.querySelector('.card-actions');
-                    actions.style.display = 'none';
-                    
-                    alert(`Swap request from ${userName} accepted!`);
-                });
-            });
-            
-            // Reject button functionality
-            const rejectBtns = document.querySelectorAll('.btn-reject');
-            rejectBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const card = this.closest('.request-card');
-                    const userName = card.querySelector('h3').textContent;
-                    
-                    if(confirm(`Are you sure you want to reject ${userName}'s swap request?`)) {
-                        // Remove card with animation
-                        card.style.transform = 'translateX(-100px)';
-                        card.style.opacity = '0';
-                        
-                        setTimeout(() => {
-                            card.remove();
-                        }, 300);
-                        
-                        alert(`Swap request from ${userName} rejected.`);
+                    // Determine the actual status of the card based on its classes
+                    let cardStatusClass = '';
+                    if (card.classList.contains('pending')) {
+                        cardStatusClass = 'pending';
+                    } else if (card.classList.contains('accepted')) {
+                        cardStatusClass = 'accepted';
+                    } else if (card.classList.contains('rejected')) {
+                        cardStatusClass = 'rejected';
                     }
-                });
-            });
-            
-            // Search functionality
-            const searchInput = document.querySelector('.search-container input');
-            searchInput.addEventListener('keyup', function() {
-                const searchTerm = this.value.toLowerCase();
-                const cards = document.querySelectorAll('.request-card');
-                
-                cards.forEach(card => {
-                    const userName = card.querySelector('h3').textContent.toLowerCase();
-                    if(userName.includes(searchTerm)) {
-                        card.style.display = 'block';
+
+                    // Check if card matches the selected status
+                    const matchesStatus = (selectedStatus === 'all' || cardStatusClass === selectedStatus);
+
+                    // Check if card matches the search term in user name
+                    const matchesSearch = userName.includes(searchTerm);
+
+                    // Show or hide the card based on both conditions
+                    if (matchesStatus && matchesSearch) {
+                        card.style.display = 'flex'; // Use 'flex' because your CSS uses flexbox for cards
                     } else {
                         card.style.display = 'none';
                     }
                 });
+            }
+
+            // Event Listener for Status Dropdown change
+            statusDropdown.addEventListener('change', filterRequests);
+
+            // Event Listener for Search Input (live search on keyup)
+            searchInput.addEventListener('keyup', filterRequests);
+
+            // Event Delegation for Accept and Reject Buttons
+            // This is more efficient as it attaches one listener to the document
+            // instead of many to individual buttons, and works for dynamically added cards.
+            document.addEventListener('click', function(event) {
+
+                // Handle Accept button clicks
+                if (event.target.classList.contains('action-button') && event.target.classList.contains('accept')) {
+                    const acceptBtn = event.target;
+                    const card = acceptBtn.closest('.request-card'); // Find the closest parent card
+
+                    if (card) {
+                        const userName = card.querySelector('.user-name').textContent; // Get user name from .user-name span
+
+                        // 1. Update the card's status class
+                        card.classList.remove('pending', 'rejected'); // Remove existing status classes
+                        card.classList.add('accepted'); // Add 'accepted' class
+
+                        // 2. Update the displayed status text
+                        const statusDisplaySpan = card.querySelector('.status-display');
+                        const statusTextSpan = statusDisplaySpan.querySelector('.status-text');
+                        if (statusDisplaySpan && statusTextSpan) {
+                            statusDisplaySpan.classList.remove('pending-status', 'rejected-status'); // Remove old status color class
+                            statusDisplaySpan.classList.add('accepted-status'); // Add new status color class
+                            statusTextSpan.innerHTML = '<i class="fas fa-check-circle"></i> Accepted'; // Update text and icon
+                        }
+
+                        // 3. Hide the action buttons for this card
+                        const actionButtonsContainer = card.querySelector('.card-actions');
+                        if (actionButtonsContainer) {
+                            actionButtonsContainer.style.display = 'none'; // Hide the entire container
+                        }
+
+                        alert(`Swap request from ${userName} accepted!`);
+
+                        // Re-run the filter to update card visibility based on the new status
+                        filterRequests();
+                    }
+                }
+
+                // Handle Reject button clicks
+                if (event.target.classList.contains('action-button') && event.target.classList.contains('reject')) {
+                    const rejectBtn = event.target;
+                    const card = rejectBtn.closest('.request-card');
+
+                    if (card) {
+                        const userName = card.querySelector('.user-name').textContent;
+
+                        if (confirm(`Are you sure you want to reject ${userName}'s swap request?`)) {
+                            // 1. Update the card's status class
+                            card.classList.remove('pending', 'accepted'); // Remove existing status classes
+                            card.classList.add('rejected'); // Add 'rejected' class
+
+                            // 2. Update the displayed status text
+                            const statusDisplaySpan = card.querySelector('.status-display');
+                            const statusTextSpan = statusDisplaySpan.querySelector('.status-text');
+                            if (statusDisplaySpan && statusTextSpan) {
+                                statusDisplaySpan.classList.remove('pending-status', 'accepted-status'); // Remove old status color class
+                                statusDisplaySpan.classList.add('rejected-status'); // Add new status color class
+                                statusTextSpan.innerHTML = '<i class="fas fa-times-circle"></i> Rejected'; // Update text and icon
+                            }
+
+                            // 3. Hide the action buttons for this card
+                            const actionButtonsContainer = card.querySelector('.card-actions');
+                            if (actionButtonsContainer) {
+                                actionButtonsContainer.style.display = 'none'; // Hide the entire container
+                            }
+
+                            alert(`Swap request from ${userName} rejected.`);
+
+                            // Re-run the filter to update card visibility based on the new status
+                            filterRequests();
+                        }
+                    }
+                }
             });
+
+            // Initial call to filter requests when the page first loads
+            // This ensures that the correct cards are displayed based on the default dropdown selection ("All")
+            filterRequests();
         });
-    </script>
+    </script>\
    
 </body>
 </html>
