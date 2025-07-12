@@ -1,4 +1,3 @@
-
 * {
             margin: 0;
             padding: 0;
@@ -39,6 +38,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            
         }
 
         .header-content {
@@ -56,7 +56,8 @@
 
         .logo i {
             margin-right: 10px;
-            color: var(--secondary);
+             color: white;
+
         }
 
         .nav-links {
@@ -78,9 +79,7 @@
             background-color: rgba(255, 255, 255, 0.1);
         }
 
-        .nav-links a.active {
-            background-color: var(--secondary);
-        }
+        
 
         .user-actions {
             display: flex;
@@ -109,7 +108,7 @@
         }
 
         .search-section h1 {
-            color: var(--white);
+            
             margin-bottom: 20px;
             font-size: 32px;
         }
@@ -142,7 +141,7 @@
         }
 
         .search-container button:hover {
-            background-color: #ff5252;
+            background-color:var(--dark-text);
         }
 
         /* User Cards Section */
@@ -252,7 +251,7 @@
         }
 
         .request-btn:hover {
-            background-color: var(--primary-dark);
+            background-color: var(--dark-text);
         }
 
         /* Pagination */
@@ -279,17 +278,18 @@
         }
 
         .pagination button:hover {
-            background-color: var(--primary);
+            background-color: var(--dark-text);
             color: var(--white);
         }
 
         .pagination button.active {
-            background-color: var(--primary);
+            background-color:var(--dark-text);
             color: var(--white);
         }
 
         /* Footer */
         footer {
+            position-area: fixed;
             background-color: var(--dark-text);
             color: var(--white);
             padding: 40px 0 20px;
