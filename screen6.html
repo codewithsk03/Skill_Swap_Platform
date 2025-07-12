@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swap Requests - Skill Swap Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="screen6.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-exchange-alt"></i>
+                    SkillSwap
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#" class="active">Swap Request</a></li>
+                        <li><a href="#">Messages</a></li>
+                        <li><a href="#">Notifications</a></li>
+                    </ul>
+                </nav>
+                <div class="profile">
+                    <div class="profile-img">MD</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="page-header">
+            <h1 class="page-title">Swap Requests</h1>
+            <div class="status-filter">
+                <button class="status-btn active">All</button>
+                <button class="status-btn">Pending</button>
+                <button class="status-btn">Accepted</button>
+                <button class="status-btn">Rejected</button>
+            </div>
+        </div>
+
+        <div class="search-container">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search requests...">
+        </div>
+
+        <!-- Pending Requests Section -->
+        <div class="requests-container">
+            <!-- Request 1 -->
+            <div class="request-card">
+                <div class="card-header">
+                    <div class="user-avatar">MD</div>
+                    <div class="user-info">
+                        <h3>More Demo</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="rating-value">3.9/5</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skills-section">
+                    <div class="skills-title">
+                        <i class="fas fa-arrow-up"></i> Skills Offered
+                    </div>
+                    <ul class="skills-list">
+                        <li>Web Design</li>
+                        <li>UI/UX Prototyping</li>
+                        <li>Frontend Development</li>
+                    </ul>
+                </div>
+                
+                <div class="skills-section">
+                    <div class="skills-title">
+                        <i class="fas fa-arrow-down"></i> Skills Wanted
+                    </div>
+                    <ul class="skills-list">
+                        <li>Backend Development</li>
+                        <li>Database Management</li>
+                        <li>API Integration</li>
+                    </ul>
+                </div>
+                
+                <div class="status-tag status-pending">
+                    <i class="fas fa-clock"></i> Pending
+                </div>
+                
+                <div class="card-actions">
+                    <button class="btn btn-accept">
+                        <i class="fas fa-check-circle"></i> Accept
+                    </button>
+                    <button class="btn btn-reject">
+                        <i class="fas fa-times-circle"></i> Reject
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Request 2 -->
+            <div class="request-card">
+                <div class="card-header">
+                    <div class="user-avatar">JS</div>
+                    <div class="user-info">
+                        <h3>John Smith</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span class="rating-value">4.2/5</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skills-section">
+                    <div class="skills-title">
+                        <i class="fas fa-arrow-up"></i> Skills Offered
+                    </div>
+                    <ul class="skills-list">
+                        <li>Mobile App Development</li>
+                        <li>React Native</li>
+                        <li>Firebase Integration</li>
+                    </ul>
+                </div>
+                
+                <div class="skills-section">
+                    <div class="skills-title">
+                        <i class="fas fa-arrow-down"></i> Skills Wanted
+                    </div>
+                    <ul class="skills-list">
+                        <li>UI/UX Design</li>
+                        <li>Logo Design</li>
+                        <li>Brand Identity</li>
+                    </ul>
+                </div>
+                
+                <div class="status-tag status-pending">
+                    <i class="fas fa-clock"></i> Pending
+                </div>
+                
+                <div class="card-actions">
+                    <button class="btn btn-accept">
+                        <i class="fas fa-check-circle"></i> Accept
+                    </button>
+                    <button class="btn btn-reject">
+                        <i class="fas fa-times-circle"></i> Reject
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Request 3 -->
+            <div class="request-card">
+                <div class="card-header">
+                    <div class="user-avatar">AJ</div>
+                    <div class="user-info">
+                        <h3>Alex Johnson</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="rating-value">4.8/5</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skills-section">
+                    <div class="skills-title">
+                        <i class="fas fa-arrow-up"></i> Skills Offered
+                    </div>
+                    <ul class="skills-list">
+                        <li>Data Science</li>
+                        <li>Python Programming</li>
+                        <li>Machine Learning</li>
+                    </ul>
+                </div>
+                
+                <div class="skills-section">
+                    <div class="skills-title">
+                        <i class="fas fa-arrow-down"></i> Skills Wanted
+                    </div>
+                    <ul class="skills-list">
+                        <li>Cloud Architecture</li>
+                        <li>AWS Services</li>
+                        <li>DevOps</li>
+                    </ul>
+                </div>
+                
+                <div class="status-tag status-pending">
+                    <i class="fas fa-clock"></i> Pending
+                </div>
+                
+                <div class="card-actions">
+                    <button class="btn btn-accept">
+                        <i class="fas fa-check-circle"></i> Accept
+                    </button>
+                    <button class="btn btn-reject">
+                        <i class="fas fa-times-circle"></i> Reject
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Rejected Requests Section -->
+        <div class="rejected-section">
+            <h2 class="section-title">Rejected Requests</h2>
+            <div class="requests-container">
+                <!-- Rejected Request 1 -->
+                <div class="request-card">
+                    <div class="card-header">
+                        <div class="user-avatar">RS</div>
+                        <div class="user-info">
+                            <h3>Robert Smith</h3>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span class="rating-value">3.2/5</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skills-section">
+                        <div class="skills-title">
+                            <i class="fas fa-arrow-up"></i> Skills Offered
+                        </div>
+                        <ul class="skills-list">
+                            <li>Content Writing</li>
+                            <li>SEO Optimization</li>
+                            <li>Copywriting</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skills-section">
+                        <div class="skills-title">
+                            <i class="fas fa-arrow-down"></i> Skills Wanted
+                        </div>
+                        <ul class="skills-list">
+                            <li>Social Media Marketing</li>
+                            <li>Graphic Design</li>
+                            <li>Video Editing</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="status-tag status-rejected">
+                        <i class="fas fa-times-circle"></i> Rejected
+                    </div>
+                </div>
+                
+                <!-- Rejected Request 2 -->
+                <div class="request-card">
+                    <div class="card-header">
+                        <div class="user-avatar">MJ</div>
+                        <div class="user-info">
+                            <h3>Mary Johnson</h3>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span class="rating-value">4.6/5</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skills-section">
+                        <div class="skills-title">
+                            <i class="fas fa-arrow-up"></i> Skills Offered
+                        </div>
+                        <ul class="skills-list">
+                            <li>Project Management</li>
+                            <li>Agile Methodology</li>
+                            <li>Team Leadership</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skills-section">
+                        <div class="skills-title">
+                            <i class="fas fa-arrow-down"></i> Skills Wanted
+                        </div>
+                        <ul class="skills-list">
+                            <li>Data Analysis</li>
+                            <li>Business Intelligence</li>
+                            <li>Excel Advanced</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="status-tag status-rejected">
+                        <i class="fas fa-times-circle"></i> Rejected
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-exchange-alt"></i> SkillSwap
+                </div>
+                <p>Connecting talented individuals through skill exchange</p>
+                <div class="copyright">
+                    &copy; 2025 SkillSwap Platform. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+ <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Status filter functionality
+            const statusBtns = document.querySelectorAll('.status-btn');
+            statusBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    statusBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const status = this.textContent.trim();
+                    alert(`Showing ${status} requests`);
+                });
+            });
+            
+            // Accept button functionality
+            const acceptBtns = document.querySelectorAll('.btn-accept');
+            acceptBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const card = this.closest('.request-card');
+                    const userName = card.querySelector('h3').textContent;
+                    
+                    // Change status to accepted
+                    const statusTag = card.querySelector('.status-tag');
+                    statusTag.className = 'status-tag status-accepted';
+                    statusTag.innerHTML = '<i class="fas fa-check-circle"></i> Accepted';
+                    
+                    // Remove action buttons
+                    const actions = card.querySelector('.card-actions');
+                    actions.style.display = 'none';
+                    
+                    alert(`Swap request from ${userName} accepted!`);
+                });
+            });
+            
+            // Reject button functionality
+            const rejectBtns = document.querySelectorAll('.btn-reject');
+            rejectBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const card = this.closest('.request-card');
+                    const userName = card.querySelector('h3').textContent;
+                    
+                    if(confirm(`Are you sure you want to reject ${userName}'s swap request?`)) {
+                        // Remove card with animation
+                        card.style.transform = 'translateX(-100px)';
+                        card.style.opacity = '0';
+                        
+                        setTimeout(() => {
+                            card.remove();
+                        }, 300);
+                        
+                        alert(`Swap request from ${userName} rejected.`);
+                    }
+                });
+            });
+            
+            // Search functionality
+            const searchInput = document.querySelector('.search-container input');
+            searchInput.addEventListener('keyup', function() {
+                const searchTerm = this.value.toLowerCase();
+                const cards = document.querySelectorAll('.request-card');
+                
+                cards.forEach(card => {
+                    const userName = card.querySelector('h3').textContent.toLowerCase();
+                    if(userName.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+   
+</body>
+</html>

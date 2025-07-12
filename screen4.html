@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Swap Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="screen4.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-exchange-alt"></i>
+                    SkillSwap
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="active">Home</a></li>
+                        <li><a href="#">Swap Request</a></li>
+                        <li><a href="#">Messages</a></li>
+                        <li><a href="#">Notifications</a></li>
+                    </ul>
+                </nav>
+                <div class="profile">
+                    <div class="profile-img">MD</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="page-title">
+            <h1>Skill Swap Request</h1>
+        </div>
+
+        <div class="request-card">
+            <div class="request-header">
+                <div class="user-avatar">MD</div>
+                <div class="user-info">
+                    <h2>Marc Demo</h2>
+                    <p>Professional Designer & Developer</p>
+                </div>
+            </div>
+            
+            <div class="skills-container">
+                <div class="skills-section">
+                    <h3 class="section-title"><i class="fas fa-arrow-up"></i> Skills Offered</h3>
+                    <ul class="skills-list">
+                        <li><i class="fas fa-check-circle"></i> UI/UX Design</li>
+                        <li><i class="fas fa-check-circle"></i> Frontend Development (React)</li>
+                        <li><i class="fas fa-check-circle"></i> Logo & Brand Identity Design</li>
+                        <li><i class="fas fa-check-circle"></i> Responsive Web Design</li>
+                        <li><i class="fas fa-check-circle"></i> Prototyping & Wireframing</li>
+                    </ul>
+                </div>
+                
+                <div class="skills-section">
+                    <h3 class="section-title"><i class="fas fa-arrow-down"></i> Skills Wanted</h3>
+                    <ul class="skills-list">
+                        <li><i class="fas fa-star"></i> Backend Development (Node.js)</li>
+                        <li><i class="fas fa-star"></i> Mobile App Development</li>
+                        <li><i class="fas fa-star"></i> Database Management</li>
+                        <li><i class="fas fa-star"></i> DevOps & Deployment</li>
+                        <li><i class="fas fa-star"></i> API Integration</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="rating-section">
+                <div class="rating-header">
+                    <h2>Rating and Feedback</h2>
+                    <div class="rating-value">
+                        <i class="fas fa-star"></i> 4.8/5.0
+                    </div>
+                </div>
+                
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span>(24 reviews)</span>
+                </div>
+                
+                <ul class="feedback-list">
+                    <li class="feedback-item">
+                        <div class="feedback-header">
+                            <span class="feedback-author">Sarah Johnson</span>
+                            <span class="feedback-date">July 10, 2025</span>
+                        </div>
+                        <p class="feedback-content">Marc is an exceptional designer. He transformed our website with his creative skills. Highly recommended for any UI/UX work!</p>
+                    </li>
+                    <li class="feedback-item">
+                        <div class="feedback-header">
+                            <span class="feedback-author">Michael Chen</span>
+                            <span class="feedback-date">June 28, 2025</span>
+                        </div>
+                        <p class="feedback-content">Professional, timely, and great communication. Marc delivered exactly what we needed for our React application.</p>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="actions">
+                <button class="btn btn-outline">Message</button>
+                <button class="btn btn-primary">Initiate Swap</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-exchange-alt"></i> SkillSwap
+                </div>
+                <p>Connecting talented individuals through skill exchange</p>
+                <div class="copyright">
+                    &copy; 2025 SkillSwap Platform. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effect to skill items
+            const skillItems = document.querySelectorAll('.skills-list li');
+            skillItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateX(5px)';
+                });
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateX(0)';
+                });
+            });
+            
+            // Button hover effects
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                });
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Initiate Swap button functionality
+            const swapBtn = document.querySelector('.btn-primary');
+            swapBtn.addEventListener('click', function() {
+                alert('Swap request sent to Marc Demo! You will be notified when they respond.');
+            });
+        });
+    </script>
+</body>
+</html>
