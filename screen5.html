@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initiate Swap - SkillSwap</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="screen5.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-exchange-alt"></i>
+                    SkillSwap
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#" class="active">Swap Request</a></li>
+                        <li><a href="#">Messages</a></li>
+                        <li><a href="#">Notifications</a></li>
+                    </ul>
+                </nav>
+                <div class="profile">
+                    <div class="profile-img">MD</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Initiate Skill Swap</h1>
+            <p class="page-subtitle">Propose a skill exchange by selecting your offered skill and the skill you want to receive</p>
+        </div>
+
+        <div class="swap-container">
+            <div class="swap-card">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <h2>Alex Johnson</h2>
+                        <p>Senior Full-Stack Developer</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="rating-value">4.7/5 (32 reviews)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <form>
+                    <div class="form-group">
+                        <label for="offered-skill">
+                            <i class="fas fa-arrow-up"></i> Choose one of your offered skills
+                        </label>
+                        <div class="select-container">
+                            <i class="fas fa-code"></i>
+                            <select id="offered-skill" class="form-control">
+                                <option value="">Select a skill to offer</option>
+                                <option value="ui-design">UI/UX Design</option>
+                                <option value="web-dev">Web Development</option>
+                                <option value="react">React Development</option>
+                                <option value="prototyping">Prototyping</option>
+                                <option value="graphic-design">Graphic Design</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="wanted-skill">
+                            <i class="fas fa-arrow-down"></i> Choose one of their wanted skills
+                        </label>
+                        <div class="select-container">
+                            <i class="fas fa-laptop-code"></i>
+                            <select id="wanted-skill" class="form-control">
+                                <option value="">Select a skill to receive</option>
+                                <option value="nodejs">Node.js Backend Development</option>
+                                <option value="mobile">Mobile App Development</option>
+                                <option value="database">Database Management</option>
+                                <option value="devops">DevOps & Deployment</option>
+                                <option value="python">Python Programming</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">
+                            <i class="fas fa-comment-dots"></i> Message
+                        </label>
+                        <textarea id="message" class="form-control form-control-textarea" placeholder="Write a message to Alex about the skill swap..."></textarea>
+                    </div>
+
+                    <button type="button" class="btn-submit">
+                        <i class="fas fa-paper-plane"></i> Submit Swap Request
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-exchange-alt"></i> SkillSwap
+                </div>
+                <p>Connecting talented individuals through skill exchange</p>
+                <div class="copyright">
+                    &copy; 2025 SkillSwap Platform. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const submitBtn = document.querySelector('.btn-submit');
+            
+            submitBtn.addEventListener('click', function() {
+                const offeredSkill = document.getElementById('offered-skill').value;
+                const wantedSkill = document.getElementById('wanted-skill').value;
+                const message = document.getElementById('message').value;
+                
+                if (!offeredSkill) {
+                    alert('Please select a skill to offer');
+                    return;
+                }
+                
+                if (!wantedSkill) {
+                    alert('Please select a skill you want to receive');
+                    return;
+                }
+                
+                if (!message.trim()) {
+                    alert('Please write a message for the swap request');
+                    return;
+                }
+                
+                // Show loading state
+                const originalText = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending Request...';
+                this.disabled = true;
+                
+                // Simulate API request
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                    this.disabled = false;
+                    
+                    // Success effect
+                    this.style.boxShadow = '0 0 20px rgba(76, 201, 240, 0.4)';
+                    setTimeout(() => {
+                        this.style.boxShadow = '';
+                    }, 2000);
+                    
+                    // Show success message
+                    alert('Swap request sent successfully! Alex will be notified of your proposal.');
+                    
+                    // Reset form
+                    document.getElementById('offered-skill').value = '';
+                    document.getElementById('wanted-skill').value = '';
+                    document.getElementById('message').value = '';
+                }, 1500);
+            });
+        });
+    </script>
+</body>
+</html>
