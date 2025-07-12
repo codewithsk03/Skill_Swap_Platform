@@ -6,10 +6,455 @@
     <title>Swap Requests - Skill Swap Platform</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="screen6.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+            --pending-color: #ffc107; /* Renamed for clarity */
+            --accepted-color: #28a745; /* Renamed for clarity */
+            --rejected-color: #dc3545; /* Renamed for clarity */
+        }
+
+        body {
+            background-color: #f0f2f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover, 
+        nav ul li a.active {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-left: 15px;
+            cursor: pointer;
+            border: 2px solid white;
+        }
+
+        /* Main Content Styles */
+        main {
+            padding: 30px 0;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title {
+            font-size: 2.2rem;
+            color: var(--primary);
+        }
+
+        .status-filter {
+            display: flex;
+            gap: 15px;
+        }
+
+        .status-btn {
+            padding: 8px 20px;
+            border-radius: 30px;
+            background: white;
+            border: 2px solid var(--light-gray);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .status-btn.active, .status-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .search-filter-section { /* Added a new wrapper for search and filter controls */
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px; /* Space between search and dropdown */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            flex: 1; /* Allows search input to take available space */
+        }
+
+        .search-container i {
+            color: var(--gray);
+            font-size: 1.2rem;
+            margin-right: 15px;
+        }
+
+        .search-input { /* Changed from input directly to class search-input */
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            padding: 8px 0;
+        }
+
+        .status-dropdown { /* Styles for the new dropdown */
+            padding: 8px 15px;
+            border-radius: 30px;
+            border: 2px solid var(--light-gray);
+            background-color: var(--light);
+            font-size: 1rem;
+            cursor: pointer;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .status-dropdown:hover, .status-dropdown:focus {
+            border-color: var(--primary);
+        }
+
+        .requests-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .request-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            display: flex; /* Changed to flex for better control over content flow */
+            flex-direction: column;
+        }
+
+        .request-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #a1c4fd, #c2e9fb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            margin-right: 20px;
+        }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .user-info .user-name { /* Added class for username for better targeting */
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            color: #ffd700;
+        }
+
+        .rating-value {
+            margin-left: 8px;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .skills-section {
+            margin-bottom: 20px;
+        }
+
+        .skills-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .skills-title i {
+            margin-right: 8px;
+        }
+
+        .skills-list {
+            list-style: none;
+            padding-left: 25px;
+        }
+
+        .skills-list li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .skills-list li:before {
+            content: "•";
+            color: var(--accent);
+            position: absolute;
+            left: -15px;
+            font-size: 1.2rem;
+        }
+
+        .status-display { /* New class for the status text container */
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+
+        /* Status-specific styles for the text container */
+        .status-display.pending-status {
+            background: rgba(255, 193, 7, 0.15);
+            color: var(--pending-color);
+        }
+
+        .status-display.accepted-status {
+            background: rgba(40, 167, 69, 0.15);
+            color: var(--accepted-color);
+        }
+
+        .status-display.rejected-status {
+            background: rgba(220, 53, 69, 0.15);
+            color: var(--rejected-color);
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: auto; /* Push buttons to the bottom if content varies */
+            padding-top: 20px;
+            border-top: 1px solid var(--light-gray); /* Add a separator */
+        }
+
+        .action-button { /* General class for action buttons */
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 0.95rem;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .action-button.accept { /* Specific class for accept button */
+            background: linear-gradient(135deg, var(--accepted-color), #1e7e34);
+            color: white;
+        }
+
+        .action-button.reject { /* Specific class for reject button */
+            background: linear-gradient(135deg, var(--rejected-color), #bd2130);
+            color: white;
+        }
+
+        .action-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer Styles */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .requests-container {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .header-content {
+                justify-content: center;
+            }
+            
+            .profile {
+                position: absolute;
+                right: 20px;
+            }
+            
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .search-filter-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-container {
+                width: 100%; /* Make search take full width */
+            }
+
+            .status-dropdown {
+                width: 100%; /* Make dropdown take full width */
+            }
+        }
+
+        @media (max-width: 600px) {
+            .requests-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .card-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .user-avatar {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .card-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Header Section -->
     <header>
         <div class="container">
             <div class="header-content">
@@ -32,31 +477,29 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="container">
         <div class="page-header">
             <h1 class="page-title">Swap Requests</h1>
-            <div class="status-filter">
-                <button class="status-btn active">All</button>
-                <button class="status-btn">Pending</button>
-                <button class="status-btn">Accepted</button>
-                <button class="status-btn">Rejected</button>
             </div>
+
+        <div class="search-filter-section"> <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" class="search-input" placeholder="Search requests...">
+            </div>
+            <select class="status-dropdown">
+                <option value="all">All Requests</option>
+                <option value="pending">Pending</option>
+                <option value="accepted">Accepted</option>
+                <option value="rejected">Rejected</option>
+            </select>
         </div>
 
-        <div class="search-container">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Search requests...">
-        </div>
-
-        <!-- Pending Requests Section -->
         <div class="requests-container">
-            <!-- Request 1 -->
-            <div class="request-card">
+            <div class="request-card pending">
                 <div class="card-header">
                     <div class="user-avatar">MD</div>
                     <div class="user-info">
-                        <h3>More Demo</h3>
+                        <h3 class="user-name">More Demo</h3>
                         <div class="rating">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -90,26 +533,22 @@
                     </ul>
                 </div>
                 
-                <div class="status-tag status-pending">
-                    <i class="fas fa-clock"></i> Pending
+                <div class="status-display pending-status"> <i class="fas fa-clock"></i> <span class="status-text">Status: Pending</span>
                 </div>
                 
                 <div class="card-actions">
-                    <button class="btn btn-accept">
-                        <i class="fas fa-check-circle"></i> Accept
+                    <button class="action-button accept"> <i class="fas fa-check-circle"></i> Accept
                     </button>
-                    <button class="btn btn-reject">
-                        <i class="fas fa-times-circle"></i> Reject
+                    <button class="action-button reject"> <i class="fas fa-times-circle"></i> Reject
                     </button>
                 </div>
             </div>
             
-            <!-- Request 2 -->
-            <div class="request-card">
+            <div class="request-card pending">
                 <div class="card-header">
                     <div class="user-avatar">JS</div>
                     <div class="user-info">
-                        <h3>John Smith</h3>
+                        <h3 class="user-name">John Smith</h3>
                         <div class="rating">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -143,26 +582,25 @@
                     </ul>
                 </div>
                 
-                <div class="status-tag status-pending">
-                    <i class="fas fa-clock"></i> Pending
+                <div class="status-display pending-status">
+                    <i class="fas fa-clock"></i> <span class="status-text">Status: Pending</span>
                 </div>
                 
                 <div class="card-actions">
-                    <button class="btn btn-accept">
+                    <button class="action-button accept">
                         <i class="fas fa-check-circle"></i> Accept
                     </button>
-                    <button class="btn btn-reject">
+                    <button class="action-button reject">
                         <i class="fas fa-times-circle"></i> Reject
                     </button>
                 </div>
             </div>
             
-            <!-- Request 3 -->
-            <div class="request-card">
+            <div class="request-card pending">
                 <div class="card-header">
                     <div class="user-avatar">AJ</div>
                     <div class="user-info">
-                        <h3>Alex Johnson</h3>
+                        <h3 class="user-name">Alex Johnson</h3>
                         <div class="rating">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -196,117 +634,175 @@
                     </ul>
                 </div>
                 
-                <div class="status-tag status-pending">
-                    <i class="fas fa-clock"></i> Pending
+                <div class="status-display pending-status">
+                    <i class="fas fa-clock"></i> <span class="status-text">Status: Pending</span>
                 </div>
                 
                 <div class="card-actions">
-                    <button class="btn btn-accept">
+                    <button class="action-button accept">
                         <i class="fas fa-check-circle"></i> Accept
                     </button>
-                    <button class="btn btn-reject">
+                    <button class="action-button reject">
+                        <i class="fas fa-times-circle"></i> Reject
+                    </button>
+                </div>
+            </div>
+
+            <div class="request-card accepted">
+                <div class="card-header">
+                    <div class="user-avatar">SA</div>
+                    <div class="user-info">
+                        <h3 class="user-name">Sara Adams</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="rating-value">4.5/5</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skills-section">
+                    <div class="skills-title">
+                        <i class="fas fa-arrow-up"></i> Skills Offered
+                    </div>
+                    <ul class="skills-list">
+                        <li>Graphic Design</li>
+                        <li>Adobe Photoshop</li>
+                        <li>Illustrator</li>
+                    </ul>
+                </div>
+                
+                <div class="skills-section">
+                    <div class="skills-title">
+                        <i class="fas fa-arrow-down"></i> Skills Wanted
+                    </div>
+                    <ul class="skills-list">
+                        <li>3D Modeling</li>
+                        <li>Animation</li>
+                        <li>Video Production</li>
+                    </ul>
+                </div>
+                
+                <div class="status-display accepted-status">
+                    <i class="fas fa-check-circle"></i> <span class="status-text">Status: Accepted</span>
+                </div>
+                <div class="card-actions" style="display: none;">
+                    <button class="action-button accept">
+                        <i class="fas fa-check-circle"></i> Accept
+                    </button>
+                    <button class="action-button reject">
+                        <i class="fas fa-times-circle"></i> Reject
+                    </button>
+                </div>
+            </div>
+
+            <div class="request-card rejected">
+                <div class="card-header">
+                    <div class="user-avatar">RS</div>
+                    <div class="user-info">
+                        <h3 class="user-name">Robert Smith</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span class="rating-value">3.2/5</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skills-section">
+                    <div class="skills-title">
+                        <i class="fas fa-arrow-up"></i> Skills Offered
+                    </div>
+                    <ul class="skills-list">
+                        <li>Content Writing</li>
+                        <li>SEO Optimization</li>
+                        <li>Copywriting</li>
+                    </ul>
+                </div>
+                
+                <div class="skills-section">
+                    <div class="skills-title">
+                        <i class="fas fa-arrow-down"></i> Skills Wanted
+                    </div>
+                    <ul class="skills-list">
+                        <li>Social Media Marketing</li>
+                        <li>Graphic Design</li>
+                        <li>Video Editing</li>
+                    </ul>
+                </div>
+                
+                <div class="status-display rejected-status">
+                    <i class="fas fa-times-circle"></i> <span class="status-text">Status: Rejected</span>
+                </div>
+                <div class="card-actions" style="display: none;">
+                    <button class="action-button accept">
+                        <i class="fas fa-check-circle"></i> Accept
+                    </button>
+                    <button class="action-button reject">
+                        <i class="fas fa-times-circle"></i> Reject
+                    </button>
+                </div>
+            </div>
+            
+            <div class="request-card accepted">
+                <div class="card-header">
+                    <div class="user-avatar">KW</div>
+                    <div class="user-info">
+                        <h3 class="user-name">Kevin White</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="rating-value">4.7/5</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skills-section">
+                    <div class="skills-title">
+                        <i class="fas fa-arrow-up"></i> Skills Offered
+                    </div>
+                    <ul class="skills-list">
+                        <li>Digital Marketing Strategy</li>
+                        <li>Google Ads</li>
+                        <li>Analytics</li>
+                    </ul>
+                </div>
+                
+                <div class="skills-section">
+                    <div class="skills-title">
+                        <i class="fas fa-arrow-down"></i> Skills Wanted
+                    </div>
+                    <ul class="skills-list">
+                        <li>CRM Implementation</li>
+                        <li>Sales Funnels</li>
+                        <li>Lead Generation</li>
+                    </ul>
+                </div>
+                
+                <div class="status-display accepted-status">
+                    <i class="fas fa-check-circle"></i> <span class="status-text">Status: Accepted</span>
+                </div>
+                <div class="card-actions" style="display: none;">
+                    <button class="action-button accept">
+                        <i class="fas fa-check-circle"></i> Accept
+                    </button>
+                    <button class="action-button reject">
                         <i class="fas fa-times-circle"></i> Reject
                     </button>
                 </div>
             </div>
         </div>
-        
-        <!-- Rejected Requests Section -->
-        <div class="rejected-section">
-            <h2 class="section-title">Rejected Requests</h2>
-            <div class="requests-container">
-                <!-- Rejected Request 1 -->
-                <div class="request-card">
-                    <div class="card-header">
-                        <div class="user-avatar">RS</div>
-                        <div class="user-info">
-                            <h3>Robert Smith</h3>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <span class="rating-value">3.2/5</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="skills-section">
-                        <div class="skills-title">
-                            <i class="fas fa-arrow-up"></i> Skills Offered
-                        </div>
-                        <ul class="skills-list">
-                            <li>Content Writing</li>
-                            <li>SEO Optimization</li>
-                            <li>Copywriting</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="skills-section">
-                        <div class="skills-title">
-                            <i class="fas fa-arrow-down"></i> Skills Wanted
-                        </div>
-                        <ul class="skills-list">
-                            <li>Social Media Marketing</li>
-                            <li>Graphic Design</li>
-                            <li>Video Editing</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="status-tag status-rejected">
-                        <i class="fas fa-times-circle"></i> Rejected
-                    </div>
-                </div>
-                
-                <!-- Rejected Request 2 -->
-                <div class="request-card">
-                    <div class="card-header">
-                        <div class="user-avatar">MJ</div>
-                        <div class="user-info">
-                            <h3>Mary Johnson</h3>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span class="rating-value">4.6/5</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="skills-section">
-                        <div class="skills-title">
-                            <i class="fas fa-arrow-up"></i> Skills Offered
-                        </div>
-                        <ul class="skills-list">
-                            <li>Project Management</li>
-                            <li>Agile Methodology</li>
-                            <li>Team Leadership</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="skills-section">
-                        <div class="skills-title">
-                            <i class="fas fa-arrow-down"></i> Skills Wanted
-                        </div>
-                        <ul class="skills-list">
-                            <li>Data Analysis</li>
-                            <li>Business Intelligence</li>
-                            <li>Excel Advanced</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="status-tag status-rejected">
-                        <i class="fas fa-times-circle"></i> Rejected
-                    </div>
-                </div>
-            </div>
-        </div>
     </main>
 
-    <!-- Footer Section -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -320,7 +816,8 @@
             </div>
         </div>
     </footer>
- <script>
+
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Get references to key DOM elements
             const statusDropdown = document.querySelector('.status-dropdown');
@@ -447,7 +944,6 @@
             // This ensures that the correct cards are displayed based on the default dropdown selection ("All")
             filterRequests();
         });
-    </script>\
-   
+    </script>
 </body>
 </html>
